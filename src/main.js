@@ -23,18 +23,19 @@ const queryParams = {
 refs.form.addEventListener('submit', handleSearch);
 
 async function handleSearch(event) {
+  showLoader();
   event.preventDefault();
   refs.gallery.innerHTML = '';
   queryParams.page = 1;
 
   const form = event.currentTarget;
   queryParams.query = form.elements.query.value.trim();
-  showLoader();
+  
  
   if (!queryParams.query) {
     createMessage("The search field can't be empty! Please, enter your request!");
-    return;
     hideLoader();
+    return;
   }
  
   function createMessage(message) {
@@ -66,7 +67,7 @@ async function handleSearch(event) {
       
       } else if (hits.length > 0 && hits.length !== totalHits) {
       showButton();
-      refs.button.addEventListener("click", handleLoadMore);
+      refs.loadMoreBtn.addEventListener("click", handleLoadMore);
       hideLoader();
       
     } else {
@@ -83,30 +84,30 @@ async function handleSearch(event) {
     scrollBy();
   }
   
-function hideLoader() {
+  function hideLoader() {
       setTimeout(() => {
         refs.loader.classList.add('is-hidden');
-      }, 500);
+      }, 1000);
     };
 
-function showLoader() {
+  function showLoader() {
       refs.loader.classList.remove('is-hidden');
     };
   
-function hideButton() {
-      refs.button.classList.add('is-hidden');
+  function hideButton() {
+      refs.loadMoreBtn.classList.add('is-hidden');
     }
 
-function showButton() {
-      refs.button.classList.remove('is-hidden');
+  function showButton() {
+      refs.loadMoreBtn.classList.remove('is-hidden');
     }
 
 }
 
-  async function handleLoadMore() {
+async function handleLoadMore() {
     queryParams.page += 1;
     showLoader();
-    refs.button.disabled = true;
+    refs.loadMoreBtn.disabled = true;
         
     try {
       const { hits } = await getImages(queryParams);
@@ -118,32 +119,32 @@ function showButton() {
     
     } finally {
       hideLoader();
-      refs.button.disabled = false;
-           
+      refs.loadMoreBtn.disabled = false;
+      
       if (queryParams.page === queryParams.maxPage) {
         hideLoader();
         hideButton();
-        refs.button.removeEventListener("click", handleLoadMore);
+        refs.loadMoreBtn.removeEventListener("click", handleLoadMore);
         createMessage("We are sorry, but you've reached the end of search results");
       }
       scrollBy();
     }
-    function hideLoader() {
+  function hideLoader() {
       setTimeout(() => {
         refs.loader.classList.add('is-hidden');
-      }, 500);
+      }, 1000);
     };
 
-function showLoader() {
+  function showLoader() {
       refs.loader.classList.remove('is-hidden');
     };
   
-function hideButton() {
-      refs.button.classList.add('is-hidden');
+  function hideButton() {
+      refs.loadMoreBtn.classList.add('is-hidden');
     }
 
-function showButton() {
-      refs.button.classList.remove('is-hidden');
+  function showButton() {
+      refs.loadMoreBtn.classList.remove('is-hidden');
     }
 }
   
