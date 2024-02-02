@@ -82,6 +82,25 @@ async function handleSearch(event) {
     form.reset();
     scrollBy();
   }
+  
+function hideLoader() {
+      setTimeout(() => {
+        refs.loader.classList.add('is-hidden');
+      }, 500);
+    };
+
+function showLoader() {
+      refs.loader.classList.remove('is-hidden');
+    };
+  
+function hideButton() {
+      refs.button.classList.add('is-hidden');
+    }
+
+function showButton() {
+      refs.button.classList.remove('is-hidden');
+    }
+
 }
 
   async function handleLoadMore() {
@@ -109,9 +128,7 @@ async function handleSearch(event) {
       }
       scrollBy();
     }
-}
-  
-function hideLoader() {
+    function hideLoader() {
       setTimeout(() => {
         refs.loader.classList.add('is-hidden');
       }, 500);
@@ -128,6 +145,8 @@ function hideButton() {
 function showButton() {
       refs.button.classList.remove('is-hidden');
     }
+}
+  
 
  
   
