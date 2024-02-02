@@ -1,6 +1,6 @@
-export function createMarkup(hits, gallery) {
-    const markup = hits
-      .map(
+export function createMarkup(hits) {
+  return hits
+    .map(
         ({
           webformatURL,
           largeImageURL,
@@ -28,6 +28,5 @@ export function createMarkup(hits, gallery) {
         </li>`
       )
     .join('');
-   gallery.insertAdjacentHTML("beforeend", markup);
 }
   

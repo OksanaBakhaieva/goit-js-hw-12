@@ -140,20 +140,11 @@ img {
 .btn:hover {
   background-color: #6c8cff;
 }
+
 .load-btn {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.load-btn:disabled {
-  background-color: #8e8989;
-}
-
-.load-btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   width: 150px;
   height: 40px;
   padding: 8px 16px;
@@ -166,6 +157,15 @@ img {
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.64px;
+  cursor: pointer;
+}
+
+.load-btn:hover {
+  background-color: #6c8cff;
+}
+
+.load-btn:disabled {
+  background-color: #8e8989;
 }
 
 .loader {
