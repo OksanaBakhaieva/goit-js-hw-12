@@ -122,7 +122,7 @@ img {
   color: #808080;
 }
 
-.button {
+.btn {
   display: inline-flex;
   padding: 10px 16px;
   justify-content: center;
@@ -137,8 +137,17 @@ img {
   cursor: pointer;
 }
 
-.button:hover {
+.btn:hover {
   background-color: #6c8cff;
+}
+.load-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.load-btn:disabled {
+  background-color: #8e8989;
 }
 
 .load-btn {
@@ -180,6 +189,6 @@ img {
   }
 }
 
-.hidden {
+.is-hidden {
   display: none;
 }
