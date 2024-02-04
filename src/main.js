@@ -94,12 +94,13 @@ async function handleLoadMore() {
 
       } else if (res.hits.length > 0) {
         refs.gallery.insertAdjacentHTML("beforeend", createMarkup(res.hits));
+        simplyGallery.refresh();
+    refs.form.reset();
         scrollBy();
         return;
       } 
       
-    simplyGallery.refresh();
-    refs.form.reset();
+    
       
     } catch (error) {
       createMessage("Sorry, there is a problem with connection with the server");
