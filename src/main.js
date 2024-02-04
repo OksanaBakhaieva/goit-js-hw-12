@@ -103,7 +103,14 @@ async function handleLoadMore() {
       
     } catch (error) {
       createMessage("Sorry, there is a problem with connection with the server");
-    }       
+    
+    } finally {
+      hideLoader();
+      refs.form.reset();
+      if (queryParams.page === queryParams.maxPage) {
+        createMessage("We're sorry, but you've reached the end of search results!");
+      }
+    }
 }
       
 function createMessage(message) {
