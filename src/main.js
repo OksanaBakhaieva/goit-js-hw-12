@@ -79,36 +79,31 @@ async function handleSearch(event) {
 
 async function handleLoadMore() {
     queryParams.page += 1;
-    showLoader();
     showButton();
     refs.button.disabled = true;
         
     try {
       const res = await getImages(queryParams.query, queryParams.page);
-      
-      refs.gallery.insertAdjacentHTML("beforeend", createMarkup(res.hits));
-      simplyGallery.refresh();
-      
       refs.button.disabled = false;
 
       if ((res.totalHits - (queryParams.page * queryParams.per_page)) < 0) {
+        refs.gallery.insertAdjacentHTML("beforeend", createMarkup(res.hits));
         hideButton();
         createMessage("We're sorry, but you've reached the end of search results");
-      }
-               
+        scrollBy();
+
+      } else if (res.hits.length > 0) {
+        refs.gallery.insertAdjacentHTML("beforeend", createMarkup(res.hits));
+        scrollBy();
+        return;
+      } 
+      
+    simplyGallery.refresh();
     refs.form.reset();
       
     } catch (error) {
       createMessage("Sorry, there is a problem with connection with the server");
-    
-    } finally {
-      hideLoader();
-      refs.form.reset();
-      if (queryParams.page === queryParams.maxPage) {
-        createMessage("We're sorry, but you've reached the end of search results!");
-      }
-      scrollBy();
-    }
+    }       
 }
       
 function createMessage(message) {
